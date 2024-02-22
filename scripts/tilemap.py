@@ -1,6 +1,7 @@
 import pygame
 
 
+# ტურის ბლოკების, გარემოს კლასი
 
 
 class Tilemap:
@@ -9,7 +10,7 @@ class Tilemap:
         self.tile_size = tile_size
         self.tilemap = {}
         self.offgrid_tiles = []
-
+        # tiled აპლიკაციის(ტურების შესაქმნელი) ბიბლიოთეკის საშუალებით ბლოკების გამოტანა და ლექსიკონში/ სიაში შეტანა
         self.sprite_group = pygame.sprite.Group()
         for layer in game.tmx_data.visible_layers:
             if layer.name == 'offtile':
@@ -19,6 +20,7 @@ class Tilemap:
                 for tile in layer.tiles():
                     self.tilemap[str(tile[0]) + ";" + str(tile[1])] = {'pos': (tile[0], tile[1]), 'img': tile[2]}
 
+    # ბლოკების სიაში ჩამატება რასაც შეიძლება დავეჯახოთ
     # doit!!!!!!!
     def physics_rects_around(self, pos):
         rects = []
@@ -30,6 +32,8 @@ class Tilemap:
                             self.tile_size[1]))
         return rects
 
+    # ბლოკების გამოტანა ეკრანზე, მხოლოდ იმათი რაც ახლოსაა და არა ეკრანს იქით რათა კომპიუტერისთვის შრომატევადი არ იყოს
+    # offset აკლდება რათა წინ წასვლისას ბლოკებმა უკან გადაიწიოს და კამერის ეფექტი შეიქმნას
     def render(self, surf, offset=(0, 0)):
 
         for i in self.offgrid_tiles:

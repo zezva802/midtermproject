@@ -3,6 +3,7 @@ import random
 import pygame.transform
 
 
+# parallax ბექგრაუნდების მოძრაობა, რაც შორსაა ნაკლებად მოძრაობს, რაც ახლოს უფრო სწრაფად
 class Background:
     def __init__(self, pos, img, speed):
         self.pos = list(pos)
@@ -10,7 +11,6 @@ class Background:
         self.speed = speed
         self.x = 0
 
-    # doit !!!
     def render(self, surf, offset=(0, 0)):
         x = ((self.img.get_width() - offset[0]) % (
                 surf.get_width() + self.img.get_width()) - self.img.get_width()) * self.speed
@@ -19,6 +19,7 @@ class Background:
         surf.blit(self.img, (x, y))
 
 
+# კლასი ყველა ბექგრაუნდის ერთიანად ორგანიზებისთვის
 class Backgrounds:
     def __init__(self, background_images):
         self.bgs = []

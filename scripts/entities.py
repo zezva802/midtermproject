@@ -1,6 +1,7 @@
 import pygame
 
 
+# მოთამაშის კლასი
 class PhysicsEntity:
     def __init__(self, game, e_type, pos, size):
         self.game = game
@@ -13,6 +14,7 @@ class PhysicsEntity:
     def rect(self):
         return pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
 
+    # პოზიციის განახლება, დაეჯახა თუ არა მოთამაშე რამეს და შეუძლია თუ არა მოძრაობის გაგრძელება
     def update(self, tilemap, movement=(0, 0)):
         self.collisions = {'up': False, 'down': False, 'right': False, 'left': False}
         velocity_increment = 1.5
@@ -47,5 +49,6 @@ class PhysicsEntity:
         if self.collisions['down'] or self.collisions['up']:
             self.velocity[1] = 0
 
+    # მოთამაშის გამოტანა ეკრანზე
     def render(self, surf, offset=(0, 0)):
         surf.blit(self.game.assets['player'], (self.pos[0] - offset[0] - 3, self.pos[1] - offset[1]))
